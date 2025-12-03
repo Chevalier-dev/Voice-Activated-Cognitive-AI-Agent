@@ -1,214 +1,132 @@
-# AI Voice Agents Challenge - Starter Repository
+### 🚀 Voice-Activated Cognitive AI Agent
 
-Welcome to the **AI Voice Agents Challenge** by [murf.ai](https://murf.ai)!
+A real-time, voice-driven food ordering system powered by LiveKit Agents, Deepgram ASR, Gemini Flash reasoning, and Murf Falcon TTS.
 
-## About the Challenge
+### Overview
 
-We just launched **Murf Falcon** – the consistently fastest TTS API, and you're going to be among the first to test it out in ways never thought before!
+The Voice-Activated Cognitive AI Agent is a production-grade conversational system designed for low-latency, real-time food ordering using WebRTC audio streaming and structured agentic reasoning.
 
-**Build 10 AI Voice Agents over the course of 10 Days** along with help from our devs and the community champs, and win rewards!
+### Key Features
 
-### How It Works
+#### 🎙️ Real-Time Voice AI
+- WebRTC audio pipeline via LiveKit
+- Deepgram Nova-3 for speech-to-text
+- Murf Falcon for sub-200ms TTS
+- Smart turn detection & noise cancellation
 
-- One task to be provided everyday along with a GitHub repo for reference
-- Build a voice agent with specific personas and skills
-- Post on GitHub and share with the world on LinkedIn!
+#### 🧠 LLM Commerce Engine
+- Gemini Flash interprets user intent
+- Structured tool calls for catalog + orders
+- Deterministic reasoning for commerce workflows
 
-## Repository Structure
+#### 🛒 Food Ordering Flow
+- Catalog browsing
+- Intelligent filtering
+- Cart operations
+- Order creation
+- JSON-based order persistence
 
-This is a **monorepo** that contains both the backend and frontend for building voice agent applications. It's designed to be your starting point for each day's challenge task.
+#### 🖥️ Modern Web Frontend
+- Next.js + React
+- WebRTC session UI
+- Live message transcript
+- Clean, responsive interface
+
+### Repository Structure
 
 ```
-falcon-tdova-nov25-livekit/
-├── backend/          # LiveKit Agents backend with Murf Falcon TTS
-├── frontend/         # React/Next.js frontend for voice interaction
-├── start_app.sh      # Convenience script to start all services
-└── README.md         # This file
+backend/            # Python-based voice agent logic
+frontend/           # Next.js WebRTC frontend
+architecture.png    # System design diagram
+start_app.sh        # Combined startup script
 ```
 
-### Backend
+### Environment Setup
 
-The backend is based on [LiveKit's agent-starter-python](https://github.com/livekit-examples/agent-starter-python) with modifications to integrate **Murf Falcon TTS** for ultra-fast, high-quality voice synthesis.
+#### Backend `.env.local`
+```shell
+LIVEKIT_URL=
+LIVEKIT_API_KEY=
+LIVEKIT_API_SECRET=
 
-**Features:**
-
-- Complete voice AI agent framework using LiveKit Agents
-- Murf Falcon TTS integration for fastest text-to-speech
-- LiveKit Turn Detector for contextually-aware speaker detection
-- Background voice cancellation
-- Integrated metrics and logging
-- Complete test suite with evaluation framework
-- Production-ready Dockerfile
-
-[→ Backend Documentation](./backend/README.md)
-
-### Frontend
-
-The frontend is based on [LiveKit's agent-starter-react](https://github.com/livekit-examples/agent-starter-react), providing a modern, beautiful UI for interacting with your voice agents.
-
-**Features:**
-
-- Real-time voice interaction with LiveKit Agents
-- Camera video streaming support
-- Screen sharing capabilities
-- Audio visualization and level monitoring
-- Light/dark theme switching
-- Highly customizable branding and UI
-
-[→ Frontend Documentation](./frontend/README.md)
-
-## Quick Start
-
-### Prerequisites
-
-Make sure you have the following installed:
-
-- Python 3.9+ with [uv](https://docs.astral.sh/uv/) package manager
-- Node.js 18+ with pnpm
-- [LiveKit CLI](https://docs.livekit.io/home/cli/cli-setup) (optional but recommended)
-- [LiveKit Server](https://docs.livekit.io/home/self-hosting/local/) for local development
-
-### 1. Clone the Repository
-
-```bash
-git clone <your-repo-url>
-cd falcon-tdova-nov25-livekit
+DEEPGRAM_API_KEY=
+GOOGLE_API_KEY=
+MURF_API_KEY=
 ```
 
-### 2. Backend Setup
-
-```bash
-cd backend
-
-# Install dependencies
-uv sync
-
-# Copy environment file and configure
-cp .env.example .env.local
-
-# Edit .env.local with your credentials:
-# - LIVEKIT_URL
-# - LIVEKIT_API_KEY
-# - LIVEKIT_API_SECRET
-# - MURF_API_KEY (for Falcon TTS)
-# - GOOGLE_API_KEY (for Gemini LLM)
-# - DEEPGRAM_API_KEY (for Deepgram STT)
-
-# Download required models
-uv run python src/agent.py download-files
+#### Frontend `.env.local`
+```shell
+NEXT_PUBLIC_LIVEKIT_URL=
+NEXT_PUBLIC_LIVEKIT_API_KEY=
+NEXT_PUBLIC_LIVEKIT_API_SECRET=
 ```
 
-For LiveKit Cloud users, you can automatically populate credentials:
+Ensure backend and frontend keys match where required.
 
-```bash
-lk cloud auth
-lk app env -w -d .env.local
-```
+### Running the Application
 
-### 3. Frontend Setup
+Start all services with:
 
-```bash
-cd frontend
-
-# Install dependencies
-pnpm install
-
-# Copy environment file and configure
-cp .env.example .env.local
-
-# Edit .env.local with the same LiveKit credentials
-```
-
-### 4. Run the Application
-
-#### Install livekit server
-
-```bash
-brew install livekit
-```
-
-You have two options:
-
-#### Option A: Use the convenience script (runs everything)
-
-```bash
-# From the root directory
-chmod +x start_app.sh
+```shell
 ./start_app.sh
 ```
 
-This will start:
+This launches:
+- LiveKit server
+- Agent backend
+- Frontend app at http://localhost:3000
 
-- LiveKit Server (in dev mode)
-- Backend agent (listening for connections)
-- Frontend app (at http://localhost:3000)
+### Technology Stack
 
-#### Option B: Run services individually
+#### Core
+- Python
+- Next.js / React
+- LiveKit Agents
 
-```bash
-# Terminal 1 - LiveKit Server
-livekit-server --dev
+#### AI Components
+- Deepgram STT
+- Gemini Flash LLM
+- Murf Falcon TTS
 
-# Terminal 2 - Backend Agent
-cd backend
-uv run python src/agent.py dev
+#### Infra & Tools
+- WebRTC signaling
+- State manager
+- JSON-based persistence
 
-# Terminal 3 - Frontend
-cd frontend
-pnpm dev
-```
+### Capabilities
 
-Then open http://localhost:3000 in your browser!
+#### 🎧 Voice Interaction
+- Natural conversation
+- Real-time reasoning
+- Interruptible audio
+- Context retention
 
-## Daily Challenge Tasks
+#### 🛒 Commerce Logic
+- Product retrieval
+- Cart management
+- Order creation
+- Attribute disambiguation
 
-Each day, you'll receive a new task that builds upon your voice agent. The tasks will help you:
+#### 🧩 Extensible Architecture
+- Add custom tools
+- Swap TTS/STT models
+- Extend catalog schemas
 
-- Implement different personas and conversation styles
-- Add custom tools and capabilities
-- Integrate with external APIs
-- Build domain-specific agents (customer service, tutoring, etc.)
-- Optimize performance and user experience
+### System Architecture
 
-**Stay tuned for daily task announcements!**
+![System Architecture](./architecture.png)
 
-## Documentation & Resources
 
-- [Murf Falcon TTS Documentation](https://murf.ai/api/docs/text-to-speech/streaming)
-- [LiveKit Agents Documentation](https://docs.livekit.io/agents)
-- [Original Backend Template](https://github.com/livekit-examples/agent-starter-python)
-- [Original Frontend Template](https://github.com/livekit-examples/agent-starter-react)
+The high-level system design is illustrated in **architecture.png**, showcasing the flow from audio → ASR → LLM reasoning → tool calls → TTS → audio streaming.
 
-## Testing
+### Future Enhancements
+- Multi-vendor ordering
+- User profile memory
+- Simulated checkout and payments
+- Analytics dashboard
+- Multi-turn commerce flows
 
-The backend includes a comprehensive test suite:
+### About the Project
 
-```bash
-cd backend
-uv run pytest
-```
-
-Learn more about testing voice agents in the [LiveKit testing documentation](https://docs.livekit.io/agents/build/testing/).
-
-## Contributing & Community
-
-This is a challenge repository, but we encourage collaboration and knowledge sharing!
-
-- Share your solutions and learnings on GitHub
-- Post about your progress on LinkedIn
-- Join the [LiveKit Community Slack](https://livekit.io/join-slack)
-- Connect with other challenge participants
-
-## License
-
-This project is based on MIT-licensed templates from LiveKit and includes integration with Murf Falcon. See individual LICENSE files in backend and frontend directories for details.
-
-## Have Fun!
-
-Remember, the goal is to learn, experiment, and build amazing voice AI agents. Don't hesitate to be creative and push the boundaries of what's possible with Murf Falcon and LiveKit!
-
-Good luck with the challenge!
-
----
-
-Built for the AI Voice Agents Challenge by murf.ai
+This project demonstrates a full-stack, agentic, voice-driven commerce system built with industry-grade tools and real-time streaming technologies.
+It is designed as a robust foundation for next-generation conversational commerce applications.
